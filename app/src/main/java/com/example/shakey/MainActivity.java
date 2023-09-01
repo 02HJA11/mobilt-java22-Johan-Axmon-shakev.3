@@ -12,6 +12,8 @@ import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,7 +29,10 @@ public class MainActivity extends AppCompatActivity {
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         TextView text = findViewById(R.id.text1);
         TextView text2 = findViewById(R.id.textView);
-
+        Button btn = findViewById(R.id.button);
+        Toast toast = Toast.makeText(this, "started", Toast.LENGTH_SHORT);
+        Toast toast2 = Toast.makeText(this, "stopped", Toast.LENGTH_SHORT);
+        Toast shook = Toast.makeText(this, "Slow down", Toast.LENGTH_SHORT);
         ImageButton ib = findViewById(R.id.imageButton);
         ImageView iv = findViewById(R.id.imageView2);
 
@@ -51,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
                 int sensor3 = (int) sensorThird;
                 int ryan = (int) iv.getAlpha();
                 text2.setText("" + ryan);
-
                 text.setText("Rounded values: " + "\n" + sensor1 + "\n" + sensor2 + "\n" + sensor3 + "\n" + "Real time values: " + "\n" + sensor + "\n" + sensorSecond + "\n" + sensorThird);
                 ib.setRotation(sensor);
                 ib.setRotationX(sensorSecond);
@@ -60,11 +64,14 @@ public class MainActivity extends AppCompatActivity {
                 String sensortotext = String.valueOf(sensor);
                 Log.d("sensorChange", sensortotext);
 
+
+
                 if (ryan <= -50 || ryan >= 50) {
                     sound.start();
                     text2.setText("trigger");
+                    shook.show();
                 }
-                if(sensor1 != 0 && sensor2 != 0 && sensor3 != 00) {
+                if(sensor1 != 0 || sensor2 != 0 || sensor3 != 0) {
 
 
                     fm.beginTransaction().replace(R.id.fragmentContainerView, BlankFragment.class, null).commit();
@@ -86,8 +93,25 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        ib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    toast.show();
+                    sensorManager.registerListener(listener, sensor, 1500); //linear accell
+            }
 
-       // sm.registerListener(listener, sn, 15000000); //gravity
-        sensorManager.registerListener(listener, sensor, 1500); //linear accell
+        });
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toast2.show();
+                sensorManager.unregisterListener(listener, sensor);
+            }
+        });
+
+
+
+
     }
 }
