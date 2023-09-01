@@ -1,11 +1,7 @@
 package com.example.shakey;
 
-import static android.hardware.Sensor.TYPE_AMBIENT_TEMPERATURE;
-import static android.hardware.Sensor.TYPE_LINEAR_ACCELERATION;
 
-import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
@@ -23,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SensorManager sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        Sensor sn = sm.getDefaultSensor(Sensor.TYPE_GRAVITY);
+      //  Sensor sn = sm.getDefaultSensor(Sensor.TYPE_GRAVITY);
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         TextView text = findViewById(R.id.text1);
@@ -49,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                if(sensor1 != 0 && sensor2 != 0 && sensor2 != 00) {
+                if(sensor1 != 0 && sensor2 != 0 && sensor3 != 00) {
 
 
                     fm.beginTransaction().replace(R.id.fragmentContainerView, BlankFragment.class, null).commit();
