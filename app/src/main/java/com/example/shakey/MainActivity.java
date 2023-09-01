@@ -23,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SensorManager sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-      //  Sensor sn = sm.getDefaultSensor(Sensor.TYPE_GRAVITY);
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         TextView text = findViewById(R.id.text1);
