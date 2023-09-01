@@ -10,6 +10,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         TextView text = findViewById(R.id.text1);
+
+        ImageButton ib = findViewById(R.id.imageButton);
+        ImageView iv = findViewById(R.id.imageView2);
+        float ryan = 100;
 
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction()
@@ -42,8 +49,12 @@ public class MainActivity extends AppCompatActivity {
                 int sensor3 = (int) sensorThird;
 
                 text.setText("Rounded values: " + "\n" + sensor1 + "\n" + sensor2 + "\n" + sensor3 + "\n" + "Real time values: " + "\n" + sensor + "\n" + sensorSecond + "\n" + sensorThird);
-
-
+                ib.setRotation(sensor);
+                ib.setRotationX(sensorSecond);
+                ib.setRotationY(sensorThird);
+                iv.setAlpha(sensorSecond + sensorSecond + sensorThird);
+                String sensortotext = String.valueOf(sensor);
+                Log.d("sensorChange", sensortotext);
 
                 if(sensor1 != 0 && sensor2 != 0 && sensor3 != 00) {
 
